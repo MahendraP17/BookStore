@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function Contact() {
   const {
@@ -20,7 +21,9 @@ function Contact() {
   };
 
   return (
-    <div className="w-screen h-screen bg-gray-100 dark:bg-slate-800 flex items-center justify-center p-4">
+    <>
+    <Navbar />
+    <div className="w-screen h-screen md:pt-20 bg-gray-100 dark:bg-slate-800 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-slate-900 p-6 rounded-md shadow-md w-full max-w-md relative">
 
         {/* Close Button */}
@@ -81,6 +84,7 @@ function Contact() {
         </form>
       </div>
     </div>
+    </>
   );
 }
 

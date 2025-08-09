@@ -1,0 +1,19 @@
+filterData is an array for Map.
+----
+
+In react "props" (properties) are a way to pass data from a parent component to a child component.
+
+Props allow components to be dynamic and flexible, once they receive different and render accordingly.
+------
+
+container
+
+Centers the element automatically.
+
+Adjusts its width based on Tailwind’s responsive breakpoints.
+------
+
+RH80-T31G-0MG4-RM0U-88D4-98F6
+
+
+jnlc jrsz tyhp ikxr

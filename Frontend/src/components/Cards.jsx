@@ -15,8 +15,9 @@ function Cards({ item }) {
             {item.category && <div className="badge badge-secondary ml-2">{item.category}</div>}
           </h2>
           <p>{item.title}</p>
-          <div className="card-actions justify-between">
-            <div className="badge badge-outline">
+          <div className="card-actions justify-between ">
+          <div className="badge badge-outline text-black dark:!text-white">
+
               {item.price ? `$${item.price.toFixed(2)}` : "Free"}
             </div>
             <button className="cursor-pointer px-3 py-1 rounded-full border-2 hover:bg-pink-500 hover:text-white duration-200">

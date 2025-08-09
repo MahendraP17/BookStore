@@ -3,34 +3,43 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cards from './Cards';
+import axios from 'axios';
 
 export default function Freebook() {
-  const [list, setList] = useState([]);
+  const [book, setList] = useState([]);
 
   useEffect(() => {
-    fetch("/list.json") // Fetch from public folder
-      .then((res) => res.json())
-      .then((data) => setList(data))
-      .catch((err) => console.error("Failed to load list.json", err));
+    const getBook = async () => {
+      try {
+        const res = await axios.get('http://localhost:4001/book');
+        
+        const freeBooks = res.data.filter((data) => data.category === "free");
+        
+        console.log(freeBooks); // ✅ Only "free" courses will be logged
+  
+        setList(freeBooks);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBook();
   }, []);
-
-  const filterData = list?.filter((data) => data.category === "free") || [];
   
 
   var settings = {
     dots: true,
-    infinite: true, // Enable infinite scrolling
+    infinite: true,
     speed: 500,
     slidesToShow: 3,
-    slidesToScroll: 1, // Change this to 1 for smoother movement
-    autoplay: true, // Enable auto sliding
-    autoplaySpeed: 2000, // Slide every 2 seconds
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1, // Keep scrolling 1 at a time
+          slidesToScroll: 1,
           infinite: true,
           dots: true
         },
@@ -39,7 +48,7 @@ export default function Freebook() {
         breakpoint: 768,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1, // Keep scrolling 1 at a time
+          slidesToScroll: 1,
           infinite: true
         },
       },
@@ -53,9 +62,9 @@ export default function Freebook() {
       },
     ],
   };
-  
 
   return (
+    <>
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-5">
       <div>
         <h1 className="font-semibold text-xl pb-2">
@@ -64,13 +73,13 @@ export default function Freebook() {
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           Accusantium veritatis alias pariatur ad dolor repudiandae eligendi
-          corporis is a nulla non suscipit, iure neque earum?
+          corporis a nulla non suscipit, iure neque earum?
         </p>
       </div>
       <div className="w-screen container max-w-screen-lg xl:max-w-screen-xl mx-auto">
-        {filterData.length > 0 ? (
+        {book.length > 0 ? (
           <Slider {...settings}>
-            {filterData.map((item) => (
+            {book.map((item) => (
               <Cards item={item} key={item.id} />
             ))}
           </Slider>
@@ -79,5 +88,6 @@ export default function Freebook() {
         )}
       </div>
     </div>
+    </>
   );
 }

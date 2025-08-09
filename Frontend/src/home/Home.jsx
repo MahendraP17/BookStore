@@ -7,7 +7,7 @@ import Banner from '../components/Banner';
 function Home() {
     return (
         <>
-        <div className=' w-full'>
+        <div className='w-full overflow-x-hidden'>
 
             <Navbar />
             <Banner />
